@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GSU Student Photo Album</title>
+  <link rel="icon" href="./favicon.png">
+  <link rel="stylesheet" href="navigation-footer.css">
+
+  <!-- Font and Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.min.css">
+  <script src="fontawesome-free-7.1.0-web/js/all.min.js"></script>
+  <style>
+    :root {
+      --primary: #0b6b3a;
+      --dark-green: #064b26;
+      --muted: #f3f5f6;
+      --card: #ffffff;
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f7fbf8, white);
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+
+
+    /* ====== STAFF CARDS ====== */
+    .staff-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      justify-items: center;
+      padding: 40px 20px;
+    }
+
+    .staff-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .staff-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .staff-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .staff-info {
+      padding: 15px;
+    }
+
+    .staff-info h3 {
+      margin: 10px 0 5px;
+      color: #064b26;
+      font-size: 1.1rem;
+    }
+
+    .staff-info p {
+      color: #555;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #064b26;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ====== Banner / Navigation ====== -->
+  <div class="banner">
+    <img src="img/logo.png" alt="GSU Logo" />
+    <h2>
+      GSU COMPUTER SCIENCE <br /> DEPARTMENT
+      PHOTO ALBUM
+    </h2>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div id="dropdown" class="dropdown">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="staff.html"><i class="fa-solid fa-chalkboard-user"></i> Staff</a>
+      <a href="student.html"><i class="fa-solid fa-user-graduate"></i> Students</a>
+      <a href="about-sch.html"><i class="fa-solid fa-school"></i> About School</a>
+      <a href="about-dev.html"><i class="fa-solid fa-laptop-code"></i> About Developer</a>
+    </div>
+  </div>
+
+  <p class="font">
+    <marquee direction="">GOMBE STATE UNIVERSITY CLASS OF 2025</marquee>
+
+  </p>
+
+  <h1>Our Staff Members</h1>
+
+  <div class="staff-container">
+    <div class="staff-card">
+      <img src="HOD.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Associate Prof. Mustapha Ismail</h3>
+        <p>H O D</p>
+      </div>
+    </div>
+
+
+    <div class="staff-card">
+      <img src="hajara.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Dr. Hajara Musa</h3>
+        <p>Co-odinator</p>
+      </div>
+    </div>
+
+
+    <div class="staff-card">
+      <img src="Baban.jpeg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Mr. Abubakar Adamu</h3>
+        <p>Permanent Co-odinator</p>
+      </div>
+    </div>
+
+
+
+    <div class="staff-card">
+      <img src="./dr. mk.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Dr. Muhammed Kabir Ahmed</h3>
+        <p>Senior Lecturer</p>
+      </div>
+    </div>
+
+    <div class="staff-card">
+      <img src="./dr jauro.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Dr. Suleiman Salihu Jauro</h3>
+        <p>Senior Lecturer</p>
+      </div>
+    </div>
+
+
+
+    <div class="staff-card">
+      <img src="./dr. yahya l.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Dr. Lamido Yahya</h3>
+        <p>Senior Lecturer</p>
+      </div>
+    </div>
+
+    <div class="staff-card">
+      <img src="Shalan.jpeg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Dr. Aliyu Omar Shelleng</h3>
+        <p>Senior Lecturer</p>
+      </div>
+    </div>
+
+    <div class="staff-card">
+      <img src="./malam aminaa.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Dr. Amina Nuhu Muhammad</h3>
+        <p>Assistant Lecturer</p>
+      </div>
+    </div>
+
+
+
+    <div class="staff-card">
+      <img src="Dr.Aliyu Aminu.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Dr. Aliyu Aminu</h3>
+        <p>Lecturer</p>
+      </div>
+    </div>
+
+    <div class="staff-card">
+      <img src="./drr.. ajuji.png" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Mr. Mohammed Ajuji</h3>
+        <p>Lecturer</p>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="staff-card">
+      <img src="./Dawaki.jpeg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Mr. Dawaki Muhammad</h3>
+        <p>Lecturer</p>
+      </div>
+    </div>
+
+    <div class="staff-card">
+      <img src="Samaila.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Mr .Samaila Audu</h3>
+        <p>Lecturer</p>
+      </div>
+    </div>
+
+    <div class="staff-card">
+      <img src="Malam abakar.jpeg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Mr. Abubakar Abdullahi</h3>
+        <p>Lecturer</p>
+      </div>
+    </div>
+
+
+
+    <div class="staff-card">
+      <img src="Honor.jpg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Mr. Jungudo Mai Gari</h3>
+        <p>Lecturer</p>
+      </div>
+    </div>
+
+    <div class="staff-card">
+      <img src="maths.jpeg" alt="Staff Photo">
+      <div class="staff-info">
+        <h3>Mr. Bashir</h3>
+        <p>Lecturer</p>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  <!-- ====== Back to Top Button ====== -->
+  <button id="backToTop" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- ====== Footer ====== -->
+  <footer style="background-color:#064b26;">
+    <div class="copyright">
+      &copy; Copyright <strong><span>2025</span></strong>. All Rights Reserved
+    </div>
+    <p>Designed by<a href="tel:+2348021480655" class="call">S.Dankasuwa</a></p>
+  </footer>
+
+  <script>
+    // Toggle dropdown menu
+    function toggleMenu() {
+      document.getElementById("dropdown").classList.toggle("open");
+    }
+
+    // Close dropdown when clicking outside
+    window.addEventListener("click", function (e) {
+      const dropdown = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-toggle") && !e.target.closest("#dropdown")) {
+        dropdown.classList.remove("open");
+      }
+    });
+
+    // Show or hide back to top button
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    });
+
+    // Scroll to top (smooth & fast)
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+
+</html>
