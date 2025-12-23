@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GSU Student Photo Album</title>
+  <link rel="stylesheet" href="navigation-footer.css">
+  <link rel="icon" href="./favicon.png">
+  <!-- Font and Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.min.css">
+  <script src="fontawesome-free-7.1.0-web/js/all.min.js"></script>
+  <style>
+    :root {
+      --primary: #0b6b3a;
+      --dark-green: #064b26;
+      --muted: #f3f5f6;
+      --card: #ffffff;
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f7fbf8, white);
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ====== Main Content ====== */
+    main {
+      padding-top: 100px;
+      padding-bottom: 100px;
+      text-align: center;
+    }
+
+
+
+    .staff-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .staff-section h2 {
+      font-size: 1.8rem;
+      color: var(--dark-green);
+      margin-bottom: 40px;
+    }
+
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 35px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .staff-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(11, 107, 58, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .staff-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .staff-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .staff-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(6, 75, 38, 0.85);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      transition: height 0.4s ease;
+    }
+
+    .staff-card:hover .staff-overlay {
+      height: 100%;
+    }
+
+
+
+
+
+    @media (max-width: 600px) {
+      .banner h2 {
+        font-size: 0.9rem;
+      }
+
+      .staff-section h2 {
+        font-size: 1.5rem;
+      }
+    }
+      /* Background overlay */
+  #downloadModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  /* Modal box */
+  .modal-box {
+    background: #ffffff;
+    width: 90%;
+    max-width: 350px;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+  }
+
+  /* Fade animation */
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.8);}
+    to {opacity: 1; transform: scale(1);}
+  }
+
+  /* Button */
+  .download-btn {
+    background: #0d9736;
+    color: #fff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 18px;
+    width: 100%;
+  }
+  .cancel-btn {
+    background: #ff3b30; /* red */
+    color: #fff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: none;
+  }
+  </style>
+</head>
+
+<body>
+<!-- Modal -->
+<!-- Modal -->
+<div id="downloadModal">
+  <div class="modal-box">
+    <h2> <i class="fa fa-download"></i> Download Our App</h2>
+    <p>Get better performance and smooth experience on our mobile app.</p>
+
+    <a href="GSU-CS-ND-ALBUM_1_1.0.apk" class="download-btn">Download Now</a>
+
+    <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+  // Hide modal after 5 seconds automatically
+  setTimeout(function() {
+    closeModal();
+  }, 5000);
+
+  // Hide modal function
+  function closeModal() {
+    document.getElementById("downloadModal").style.display = "none";
+  }
+</script>
+
+
+  <!-- Add Font Awesome link in your <head> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <div class="banner">
+    <img src="img/logo.png" alt="GSU Logo" />
+    <h2>
+      GSU COMPUTER SCIENCE <br /> DEPARTMENT
+      PHOTO ALBUM
+    </h2>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div id="dropdown" class="dropdown">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="staff.html"><i class="fa-solid fa-chalkboard-user"></i> Staff</a>
+      <a href="student.html"><i class="fa-solid fa-user-graduate"></i> Students</a>
+      <a href="about-sch.html"><i class="fa-solid fa-school"></i> About School</a>
+      <a href="about-dev.html"><i class="fa-solid fa-laptop-code"></i> About Developer</a>
+    </div>
+  </div>
+  <!-- ====== Main Content ====== -->
+
+  <p class="font">
+    <marquee direction="">GOMBE STATE UNIVERSITY CLASS OF 2025</marquee>
+  </p>
+
+  <section class="staff-section">
+    <h2>Meet Our Academic & Technical Staff</h2>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <img src="img/tinibo.jfif" alt="President">
+        <div class="staff-overlay">
+          <h3>Asiwaju Bola Ahmed Tinubu</h3>
+          <p>President</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <img src="img/inuwa.jfif" alt="Governor">
+        <div class="staff-overlay">
+          <h3>Inuwa Yahya</h3>
+          <p>Governor of Gombe State</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <img src="img/sarki.jfif" alt="Emir">
+        <div class="staff-overlay">
+          <h3>Abubakar Shehu Abubakar III</h3>
+          <p>Emir of Gombe</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <img src="staff1.jpg" alt="Emir">
+        <div class="staff-overlay">
+          <h3>Prof. Sani Ahmed Yauta</h3>
+          <p>The Vice Chancellor-Ag</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <img src="staff2.jpg" alt="Emir">
+        <div class="staff-overlay">
+          <h3>Prof. Danladi M. Umar</h3>
+          <p>The Deputy Vice Chancellor-Admin</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <img src="staff3.jpg" alt="Emir">
+        <div class="staff-overlay">
+          <h3>Dr. Abubakar Bapeto</h3>
+          <p>The Registrar</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <img src="staff4.jpg" alt="Emir">
+        <div class="staff-overlay">
+          <h3>Prof. Usman Bala</h3>
+          <p>Prof. Director ODLC</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <img src="staff5.jpg" alt="Emir">
+        <div class="staff-overlay">
+          <h3>Dr. Zubairu Sulaiman</h3>
+          <p>The Deputy Director ODLC</p>
+        </div>
+      </div>
+
+
+
+    </div>
+  </section>
+  </main>
+
+  <!-- ====== Back to Top Button ====== -->
+  <button id="backToTop" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- ====== Footer ====== -->
+  <footer style="background-color: #064b26;">
+    <div class="copyright">
+      <div>
+        &copy; Copyright <strong><span>2025</span></strong>. All Rights Reserved
+      </div>
+      <p>Designed by <a href="tel:+2348021480655" class="call">S.Dankasuwa</a></p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("dropdown").classList.toggle("open");
+    }
+
+    window.addEventListener("click", (e) => {
+      const dropdown = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-toggle") && !e.target.closest("#dropdown")) {
+        dropdown.classList.remove("open");
+      }
+    });
+
+    // Back to Top
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      backToTop.style.display = window.scrollY > 250 ? "block" : "none";
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+
+</html>
