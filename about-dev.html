@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./fontawesome-free-7.1.0-web/css/all.min.css">
+  <title>About Developer - GSU</title>
+  <link rel="icon" href="./favicon.png">
+  <link rel="stylesheet" href="navigation-footer.css">
+  <style>
+    :root {
+      --primary: #0b6b3a;
+      --dark-green: #064b26;
+      --muted: #f3f5f6;
+      --card: #ffffff;
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f7fbf8, white);
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .dev-container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      padding: 40px 30px;
+      text-align: center;
+      transition: 0.3s ease;
+    }
+
+    .dev-container:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .dev-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid #0b6b3a;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 1px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .dev-container h2 {
+      color: #0b6b3a;
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .dev-container h4 {
+      color: #444;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .dev-container p {
+      color: #333;
+      font-size: 1rem;
+      text-align: justify;
+      margin-bottom: 15px;
+    }
+
+    .dev-social {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .dev-social a {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #064b26;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: 0.3s ease;
+    }
+
+    .dev-social a:hover {
+      background: #064b26;
+      transform: translateY(-3px);
+    }
+
+    .contact {
+      background: #f0faf4;
+      border: 1px solid #d2ebda;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 25px;
+      font-weight: 500;
+      color: #064b26;
+    }
+
+    .contact b {
+      color: #0b6b3a;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 25px;
+      background: #0b6b3a;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    a.back:hover {
+      background: #064b26;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .dev-container {
+        padding: 25px 20px;
+      }
+
+      .dev-container h2 {
+        font-size: 1.5rem;
+      }
+
+      .dev-container p {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 40px;
+      box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.15);
+      border-top: 3px solid var(--dark-green);
+    }
+
+    footer .social {
+      margin-bottom: 10px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 1.1rem;
+      transition: opacity 0.3s;
+    }
+
+    footer a:hover {
+      opacity: 0.8;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <!-- Add Font Awesome link in your <head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.min.css">
+    <div class="banner">
+      <img src="img/logo.png" alt="GSU Logo" />
+      <h2>
+        GSU COMPUTER SCIENCE <br /> DEPARTMENT
+        PHOTO ALBUM
+      </h2>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+      <div id="dropdown" class="dropdown">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="staff.html"><i class="fa-solid fa-chalkboard-user"></i> Staff</a>
+        <a href="student.html"><i class="fa-solid fa-user-graduate"></i> Students</a>
+        <a href="about-sch.html"><i class="fa-solid fa-school"></i> About School</a>
+        <a href="about-dev.html"><i class="fa-solid fa-laptop-code"></i> About Developer</a>
+      </div>
+    </div>
+
+    <div class="dev-container">
+      <img src="./dev-s.jpg" alt="Developer Photo" class="dev-photo" />
+      <h2>Saidu Musa Dankasuwa</h2>
+      <h4 style="color:maroon;">About School</h4>
+
+      <p>
+        At <span style="color: darkgreen; font-weight: bold;"> S.Dankasuwa</span> we believe in turning ideas into
+        digital realities. Whether you’re
+        a startup just launching or an established brand refreshing your online presence, we’re here to build websites,
+        apps, and visual tools
+        that help your business shine.
+      </p>
+
+      <h4 style="color: darkgreen;">Online Photo Albums & Invitations</h4>
+      <p>
+        Celebrate life’s big moments online: graduations, weddings, birthdays, corporate events and more.
+        We create beautiful, shareable online photo albums, interactive invitations, and digital stickers
+        that reflect your style
+        and make memories easier to share with family and friends.
+      </p>
+      <h4 style="color: darkgreen;"> Website Creation & Web Design</h4>
+      <p>
+        We design modern, responsive websites that look great on desktops, tablets, and mobile devices.
+        From simple brochure-style sites to more complex platforms, every website is built with usability,
+        speed and user experience in mind.
+      </p>
+      <h4 style="color: darkgreen;">Google Forms & Business Apps</h4>
+      <p>
+        Need to capture data, streamline your business processes or connect with customers in
+        new ways? We build custom business apps and Google Forms solutions tailored to your
+        workflow—so you spend less time on admin and more time delivering value.
+      </p>
+      <h4 style="color: darkgreen;">Social Apps & Engagement Tools</h4>
+      <p>
+        In today’s connected world, a sleek mobile or web app can help
+        you reach your audience directly. We develop social applications—from user-profiles and
+        sharing features to community platforms—that engage your customers and keep them coming back.
+
+      </p>
+      <h4 style="color: darkgreen;">Why Choose Us</h4>
+      <p>
+        Tailored Solutions: Every project is crafted with your unique vision, audience and goals in mind—no
+        “one-size-fits-all.”
+      </p>
+      <p>
+        End-to-End Service: From initial concept and design through to deployment and support, we handle it all.
+      </p>
+      <p>
+        User-Focused Design: We combine technical expertise with a strong focus on user experience so the end product is
+        polished, intuitive and loved.
+      </p>
+      <p>
+        Local & Global Reach: Based in [Your Location] (Ibadan / Nigeria), we understand local business needs—but we
+        also work for clients globally.
+      </p>
+      <p>
+        Transparent Communication: Regular updates, clear timelines, and open dialogue mean you’re always in sync with
+        your project.
+      </p>
+      <h4 style="color: darkgreen;">Our Process</h4>
+      <p>
+        Our Process
+        Consultation & Planning – We start by understanding your goals, audience, and brand story.
+      </p>
+      <p>
+        Design & Prototyping – We present visual drafts, get your feedback, and refine until you’re happy.
+      </p>
+      <p>
+        Development & Testing – We build the actual site/app, test it across devices and platforms, and ensure it
+        performs well.
+      </p>
+      <p>
+
+        Launch & Optimize – We deploy your solution, monitor initial performance, and fine-tune for best results.
+      </p>
+      <p>
+        Support & Growth – After launch we’re still around for updates, new features, and helping your digital presence
+        grow.
+      </p>
+      <p>
+        Let’s Create Something Great
+        Ready to give your business a digital edge? Whether it’s a new website, a mobile/social app, a stylish online
+        album or an interactive invitation—let’s talk.
+      </p>
+      <div class="contact">
+        <div class="dev-social">
+          <a href="https://wa.me/+2349161483993" title="Chat on WhatsApp" style="text-decoration: none;"><i
+              class="fab fa-whatsapp"></i></a>
+          <a href="tel:+2348021480655" title="Call Now" style="text-decoration: none;"><i class="fa fa-phone"></i></a>
+          <a href="mailto:s.dankasuwa001@gmail.com" title="" style="text-decoration: none;"><i
+              class="fa fa-envelope"></i></a>
+
+
+        </div>
+      </div>
+
+
+
+      <a href="home.html" class="back">⬅ Back to Home</a>
+    </div>
+
+    <!-- ====== Footer ====== -->
+    <footer style="background-color:#064b26;">
+      <div>
+        &copy; Copyright <strong><span>2025</span></strong>. All Rights Reserved
+      </div>
+      <p>Designed by <a href="tel:+2348021480655" class="call">S.Dankasuwa</a></p>
+    </footer>
+
+
+
+  </body>
+  <script>
+    // Toggle dropdown menu
+    function toggleMenu() {
+      document.getElementById("dropdown").classList.toggle("open");
+    }
+
+    // Close dropdown when clicking outside
+    window.addEventListener("click", function (e) {
+      const dropdown = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-toggle") && !e.target.closest("#dropdown")) {
+        dropdown.classList.remove("open");
+      }
+    });
+  </script>
+
+</html>
