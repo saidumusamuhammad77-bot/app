@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GSU Student Photo Album</title>
+  <link rel="icon" href="./favicon.png">
+  <link rel="stylesheet" href="navigation-footer.css">
+  <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.min.css">
+  <script src="fontawesome-free-7.1.0-web/js/all.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0b6b3a;
+      --dark-green: #064b26;
+      --muted: #f3f5f6;
+      --card: #ffffff;
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f7fbf8, white);
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+
+    /* ====== Main ====== */
+    .main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex: 1;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .input {
+      width: 100%;
+      max-width: 350px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #e6e8eb;
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      width: 300px;
+      flex: 0 0 300px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .caption {
+      padding: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .view-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+
+    .view-btn:hover {
+      background: #064b26;
+    }
+
+    /* ====== Lightbox ====== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      z-index: 60;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox .panel {
+      display: flex;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(2, 6, 23, 0.5);
+      overflow: hidden;
+      max-width: 800px;
+      width: 90%;
+      animation: scaleIn 0.3s ease;
+      position: relative;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .lightbox img {
+      width: 100%;
+      max-width: 350px;
+      height: auto;
+      object-fit: cover;
+      flex: 1;
+    }
+
+    .lightbox .meta {
+      flex: 1;
+      padding: 20px;
+      color: #111;
+    }
+
+    .meta h3 {
+      margin-bottom: 10px;
+    }
+
+    .meta p {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      background: #b30000;
+    }
+
+
+
+    ::placeholder {
+      color: rgba(26, 185, 26, 0.712);
+    }
+
+    #search {
+      background-color: #f3f5f6;
+
+    }
+  </style>
+  </style>
+</head>
+
+<body>
+  <!-- Add Font Awesome link in your <head> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <div class="banner">
+    <img src="img/logo.png" alt="GSU Logo" />
+    <h2>
+      GSU COMPUTER SCIENCE <br /> DEPARTMENT
+      PHOTO ALBUM
+    </h2>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div id="dropdown" class="dropdown">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="staff.html"><i class="fa-solid fa-chalkboard-user"></i> Staff</a>
+      <a href="student.html"><i class="fa-solid fa-user-graduate"></i> Students</a>
+      <a href="about-sch.html"><i class="fa-solid fa-school"></i> About School</a>
+      <a href="about-dev.html"><i class="fa-solid fa-laptop-code"></i> About Developer</a>
+    </div>
+  </div>
+  <p class="font">
+    <marquee direction="">GOMBE STATE UNIVERSITY CLASS OF 2025</marquee>
+  </p>
+
+  <!-- ====== Main Section ====== -->
+  <main class="main">
+    <div class="controls">
+      <input id="search" class="input" placeholder="Search by name..." />
+    </div>
+
+    <section id="gallery" class="grid" aria-live="polite"></section>
+    <div id="empty" class="muted" style="text-align:center;display:none;margin-top:30px;">No images yet — upload some or
+      try another search.</div>
+  </main>
+
+  <!-- ====== Modal (Lightbox) ====== -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <div class="panel">
+      <button class="close-btn" onclick="closeLightbox()">✖</button>
+      <img id="lb-img" src="" alt="Student Photo" style="background-color: green;" />
+      <div class="meta">
+        <h3 id="lb-name"></h3>
+        <h3 id="lb-name"></h3>
+        <p id="lb-nickname"></p>
+        <p id="lb-address"></p>
+        <p id="lb-phone"></a></p>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <!-- ====== Back to Top Button ====== -->
+  <button id="backToTop" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- ====== FOOTER ====== -->
+  <footer style="background-color:#064b26;">
+    </div>
+    <div>
+      &copy; Copyright <strong><span>2025</span></strong>. All Rights Reserved
+    </div>
+    <p>Designed by <a href="tel:+2348021480655" class="call">S.Dankasuwa</a></p>
+  </footer>
+
+  <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const students = [
+      { id: 1, name: 'Muktar Bello', address: 'Bogo Behind GGC Doma', phone: '07068980845', url: '1.png', nickname: 'Class Rep' },
+      { id: 2, name: 'Ahmad Abubakar Bello', address: 'Herwanaga Quarters Gidan Dakacin Herwanaga Gombe, Gombe State', phone: '08063797488', url: '2.jpeg', nickname: 'Ahma/Sama' },
+      { id: 3, name: 'Bello Muhammad Bello', address: 'Bolari Layin Gaziri Gombe', phone: '07061021396', url: '3.jpeg', nickname: 'Bmb' },
+      { id: 4, name: 'Asmau Isah Muhammad', address: 'Tukulma Beto', phone: '08168588957', url: '4.jpg', nickname: 'Maman Auwal' },
+      { id: 5, name: 'Aishatu Abubakar Kwairanga', address: 'Dawaki Quarters', phone: '09167371112', url: '5.jpeg', nickname: 'Nill' },
+      { id: 6, name: 'Al-amin Muhammad Wakili', address: 'Phantami Near Police Division Gombe, Gombe State', phone: '09038758694', url: '6.jpg', nickname: 'Wakili' },
+      { id: 7, name: 'Aliyu Yahuza', address: 'Herwanaga Modibo Plaza', phone: '09064984504', url: '8.jpeg', nickname: 'Amore' },
+      { id: 8, name: 'Saidu Musa Muhammad', address: 'Idi Quarters Babayo Bello Road Gombe, Gombe State', phone: '09161483993/08021480655', url: 'ggg.jpg', nickname: 'Dan Kasuwa' },
+      { id: 9, name: 'Saddika Muhammad Kanuri', address: '', phone: '08068753658', url: '9.jpg', nickname: 'Kanuri' },
+      { id: 10, name: 'Aishatu Ibrahim Garba', address: 'Bundowailaro Near Massallaci salafawa', phone: '09164409037', url: '10.jpg', nickname: 'Auta' },
+      { id: 11, name: 'Huzaifa Adamu', address: 'Bolari Gombe, Gombe State', phone: '08140502236/09164377698', url: '11.jpg', nickname: 'Huzaifa' },
+      { id: 12, name: 'Saidu Adamu', address: 'Maitama Quarters Byepass Opp Gombe Sate High Court Gombe, Gombe State', phone: '08029298989', url: '12.jpeg', nickname: 'Small' },
+      { id: 13, name: 'Muhammad Sani Muhammad', address: 'Jekadafari', phone: '07041641793', url: '13.jpg', nickname: 'Aluta' },
+      { id: 14, name: 'Naimathu Muhammad Ibrahim', address: 'Bomala Wajen Primary', phone: '09021262522', url: '14.jpeg', nickname: 'Seemah' },
+      { id: 15, name: 'Aisha Adamu Musa', address: 'Jauro Jatau', phone: '08087171900', url: '15.jpeg', nickname: 'Okonkwo' },
+      { id: 16, name: 'Yusuf Gidado', address: 'London Mai Dorawa Gombe', phone: '07066246564', url: '16.jpeg', nickname: 'Elnafaty' },
+      { id: 17, name: 'Ahmad Aliyu', address: 'Nassarawo Behind Maternity', phone: '09037444490', url: 'ahmadadm.jpg', nickname: 'dev.AMD 011' },
+      { id: 18, name: 'Abubakar Sulaima', address: 'Arawa A', phone: '08130142154', url: '18.jpeg', nickname: 'Sinfas' },
+      { id: 19, name: 'Fatima Yayaji Barambu', address: 'Bolari East, Gombe State', phone: '09136019225', url: '19.jpeg', nickname: 'Barambu' },
+      { id: 20, name: 'Aishatu Muhammad Usman', address: 'Abuja Quaters Layin Hurumin Dau', phone: '09050746437', url: '20.jpeg', nickname: 'Oum Ashraf' },
+      { id: 21, name: 'Muhmud Minshawi Mohammed', address: 'State Low-cost Gombe. Gombe State', phone: '08108749589', url: '21.jpeg', nickname: 'Nill' },
+      { id: 22, name: 'Adamu Saleh', address: 'Sudaniya Quarters', phone: '09037183221', url: '22.jpeg', nickname: 'Kinga Respect' },
+      { id: 23, name: 'Umar Khalifa Jibrin', address: 'Royal Paypass Wurin Gidan Dan Maliki', phone: '07025596538', url: '23.jpeg', nickname: 'Wizz Khalifa' },
+      { id: 24, name: 'Hafsat Jabir Waziri', address: 'Alqahira Bayan Monas Table Water, Gombe State', phone: '08104299500', url: '24.jpeg', nickname: '' },
+      { id: 25, name: 'Amira Nuhu Sani', address: 'Dawaki', phone: '07064996726', url: '25.jpeg', nickname: 'Ameesha' },
+      { id: 26, name: 'Usman Adamu Adamu', address: 'Herwagana Layin Mai Anguwa Maudo 001', phone: '09068837006', url: '26.jpeg', nickname: 'Abu Hafiz & Zunnurain' },
+      { id: 27, name: 'Mubarak Muhammad Bello', address: 'Behind Zainab Bulkachuwa Hospital Gombe, Gombe State', phone: '08021201123/08039341890', url: '27.jpeg', nickname: 'Mubarak Marshall' },
+      { id: 28, name: 'Muhammad Bashir', address: 'Yalanguruza Quarter Gombe State', phone: '09121625281', url: '28.jpeg', nickname: 'Werleed' },
+      { id: 29, name: 'Aishatu Danburam', address: 'Idi Quarters Behind Zainab Bulkachuwa', phone: '09032993123', url: '29.jpeg', nickname: 'Madam' },
+      { id: 30, name: 'Badawiyya Auwal Abdullahi', address: 'Dawaki Layin Makarantar Imamu Malik', phone: '07036015645', url: '30.jpeg', nickname: 'Ameerah' },
+      { id: 31, name: 'Ibrahim Yakubu Sarki', address: 'Kwadom', phone: '09044721079', url: '31.jpg', nickname: 'Senior Man' },
+      { id: 32, name: 'Muhammad Nasir Ahmad', address: 'Anguwa Uku Gombe State', phone: '09135106288', url: '32.jpeg', nickname: 'Nasir' },
+      { id: 33, name: 'Abdulmudallib Muhammad', address: 'Kagarawal Gombe, Gombe State', phone: '09060565592', url: '33.jpeg', nickname: 'Giwa' },
+      { id: 34, name: 'Joshua James Musa', address: 'Jauroji Quarters Kumo', phone: '09155690776', url: '34.jpg', nickname: 'Joebest' },
+      { id: 35, name: 'Elisha Tidgo Anas', address: 'Area GRA Along Gombawa Table Water Street', phone: '', url: '35.jpeg', nickname: 'Bpp Elisha' },
+      { id: 36, name: 'Muhammad Haruna Hamagam', address: 'Arawa B Quarters', phone: '09036139314', url: '36.jpeg', nickname: 'Hamagam' },
+      { id: 37, name: 'Ahmad Muhammad Kabir', address: 'Checheniya Near Cattil Market Gombe', phone: '09011276711', url: '37.jpg', nickname: 'Ahmad Don' },
+      { id: 38, name: 'Hashim Bn Adam', address: 'Hammadu Kafi Byepass Gombe, Gombe State', phone: '07025192754/09024119721', url: '38.jpeg', nickname: 'Hashim' },
+      { id: 39, name: 'Muhammad Ibrahim', address: 'Arawa B Ubaidah Academy Gombe State', phone: '09131288076', url: '39.jpeg', nickname: 'Dan Fulani' },
+      { id: 40, name: '', address: '', phone: '', url: '40.jpeg', nickname: '' },
+      { id: 41, name: 'Aliyu Abdulmumini', address: '', phone: '07069932223', url: '41.jpeg', nickname: 'Aliunmama' },
+      { id: 42, name: 'Bashir Bala Saidu', address: 'Jekadafari Dadaleso', phone: '0909729203', url: '42.jpeg', nickname: 'Subashi' },
+      { id: 43, name: 'Muhammad Adamu', address: 'Kagarawal Gabar Da Runde Primary School', phone: '09037390446', url: '43.jpg', nickname: 'Md Me Kayankari' },
+      { id: 44, name: 'Muhammad Aminu Muhammad', address: 'Karagawal Shadawanka Gombe', phone: '09063654646/07065209596', url: '44.jpg', nickname: 'Aminu Jagaliya' },
+      { id: 45, name: 'Rufai Abubakar', address: 'Yalanguruza Quarters Gombe. Gombe State', phone: '08109172983', url: '45.jpeg', nickname: 'Dadin Kowa' },
+      { id: 46, name: 'Musa Hamma Adama', address: 'Jakadafari Jankai Quarters', phone: '08134249585', url: '46.jpg', nickname: 'Legend Walker' },
+      { id: 47, name: 'shuaibu Nabiru Muhammad', address: 'Pantami Plato Junction Gombe State', phone: '07042753779', url: '47.jpeg', nickname: 'S Nabeeru' },
+      { id: 48, name: 'Maryam Muhammad Wakili', address: 'Phantami Near Police Division Gombe, Gombe State', phone: '', url: '66.jpg', nickname: 'Maryam' },
+      { id: 49, name: 'Mercyn Yakubu', address: '', phone: '07031282790', url: '62.jpg', nickname: 'Messi' },
+      { id: 50, name: 'Safiyanu Badamasi', address: 'Jos State', phone: '09020213285', url: '48.jpeg', nickname: 'Sufxy' },
+      { id: 51, name: 'Bashir Saleh Muhammad', address: 'Anguwa Uku Sabon Titi Gombe, Gombe State', phone: '09068566862/08100769733', url: '50.jpeg', nickname: 'Alh Bash' },
+      { id: 52, name: 'Yusuf Garba', address: 'Bypass Gombe, Gombe State', phone: '08033565367', url: '51.jpg', nickname: 'Alh Yusuf' },
+      { id: 53, name: 'Sirajo Bashir Muktar', address: 'State Low-cost Rd. abuja quarters', phone: '09031505938', url: '52.jpg', nickname: 'Siraj' },
+      { id: 54, name: 'Umar Muhammad Abubakar', address: 'Jauro Kuna Oppositr 2rd Gate G.S.U', phone: '08133541182', url: '53.jpeg', nickname: '' },
+      { id: 55, name: 'Yousouph Abdallah', address: 'Idi Quarters Gombe, Gombe State', phone: '08108897582', url: '54.jpg', nickname: 'Yusuf Pa' },
+      { id: 56, name: 'Muhammad Musa Yeyye', address: 'Nassarawo Quarters Near Railway', phone: '08131237992', url: '55.jpg', nickname: 'Sultan' },
+      { id: 57, name: 'Mubarak Abubakar', address: 'Manawaci Bakin Boda Gombe State', phone: '09118770906', url: '56.jpg', nickname: 'IG' },
+      { id: 58, name: '', address: '', phone: '', url: '57.jpg', nickname: 'Dan Bukar' },
+      { id: 59, name: '', address: '', phone: '', url: '58.jpg', nickname: '' },
+      { id: 60, name: 'Hauwau Idris Adamu', address: 'Dubai Quarters Bypass', phone: '08164704960', url: '59.jpg', nickname: 'Maman sajeeda' },
+      { id: 61, name: '', address: '', phone: '', url: '60.jpg', nickname: 'Dan Vice' },
+      { id: 62, name: 'Aliyu Muhammad', address: 'Arawa A Gombe, Gombe State', phone: '08148901304', url: '61.jpg', nickname: 'A.Dan Kishiya' },
+      { id: 63, name: 'Abubakar Muhammad Kawu', address: 'Tudun Wada Layi Comprehensive Gombe State', phone: '09064642324/09060648195', url: '67.PNG', nickname: 'Abinash001/Sadeeq' },
+
+      { id: 64, name: 'Maryam', address: '', phone: '', url: '65.jpg', nickname: '' },
+      { id: 65, name: 'Umar Abdullahi Alhassa', address: 'Kagarawal Gombe State', phone: '07042501499', url: '63.jpg', nickname: 'Abba' },
+      { id: 66, name: 'Auwal', address: '', phone: '', url: '64.jpg', nickname: 'Auwal' },
+      { id: 67, name: 'Zainab Saleh Waziri', address: 'Abuja Quarters Gombe State', phone: '09164680219', url: '68.jpg', nickname: 'Auwal' },
+      { id: 68, name: 'Muhammad Garba Musa', address: 'Idi Quarters Gombe State', phone: '07061417804', url: '69.jpg', nickname: 'Dan Garba' },
+
+
+
+    ];
+
+
+    const gallery = document.getElementById('gallery');
+    const empty = document.getElementById('empty');
+    const search = document.getElementById('search');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbName = document.getElementById('lb-name');
+    const lbNickname = document.getElementById('lb-nickname');
+    const lbAddress = document.getElementById('lb-address');
+    const lbPhone = document.getElementById('lb-phone');
+    const dropdown = document.getElementById('dropdown');
+
+    function render(list) {
+      gallery.innerHTML = '';
+      if (list.length === 0) { empty.style.display = 'block'; return; }
+      empty.style.display = 'none';
+      list.forEach(st => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${st.url}" alt="${st.name}">
+          <div class="caption">
+            <span>${st.name}</span>
+            <button class="view-btn" onclick="openLightbox(${st.id})">view</button>
+          </div>`;
+        gallery.appendChild(card);
+      });
+    }
+
+    function openLightbox(id) {
+      const st = students.find(s => s.id === id);
+      if (!st) return;
+      lbImg.src = st.url;
+      lbName.textContent = st.name;
+      lbNickname.textContent = "Nickname: " + st.nickname;
+      lbAddress.textContent = "Address: " + st.address;
+      lbPhone.textContent = "Phone: " + st.phone;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+    }
+
+    function toggleMenu() {
+      dropdown.classList.toggle('open');
+    }
+
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase().trim();
+      const list = students.filter(s => s.name.toLowerCase().includes(q));
+      render(list);
+    });
+
+    render(students);
+
+
+    function toggleMenu() {
+      document.getElementById("dropdown").classList.toggle("open");
+    }
+
+    // Rufe dropdown idan an danna waje
+    window.addEventListener("click", function (e) {
+      const dropdown = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-toggle") && !e.target.closest("#dropdown")) {
+        dropdown.classList.remove("open");
+      }
+    });
+
+    // Show or hide back to top button
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    });
+
+    // Scroll to top (smooth & fast)
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+  </script>
+</body>
+
+</html>
